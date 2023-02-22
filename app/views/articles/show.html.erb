@@ -1,0 +1,39 @@
+<%=@article.name%>
+<%=@article.gender%>
+<%=@article.email%>
+<%=@article.password%>
+<%=@article.user_age%>
+<%=@article.username%><br>
+<%=link_to "Edit Article", new_article_path%>
+<%= link_to "Delete", article_path(@article), data: {
+    turbo_method: :delete,
+    turbo_confirm: "Are You sure"
+} %>
+
+<h2>comments</h2>
+<%@article.comments.each do |comment|%>
+<p>
+<h4>commenter:</h4>
+<%=comment.commenter%>
+</p>
+<p>
+<h4>comments:</h4>
+<%=comment.body%>
+</p>
+<%end%>
+<h2>Add a comment:</h2>
+<%=form_with model: [@article, @article.comments.build] do |form|%>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<%end%>
+<%=image_tag @article.image.url if @article.image?%>
+
