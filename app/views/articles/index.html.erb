@@ -1,5 +1,8 @@
+<%if admin_user_signed_in?%>
 <%= link_to "Sign Out", destroy_admin_user_session_path , method: :delete %>
-
+<%else%>
+<%= link_to "Sign In", new_admin_user_session_path%>
+<% end%>
 <h1>All Data</h1> 
 <%@articles.each do |article|%>
 
